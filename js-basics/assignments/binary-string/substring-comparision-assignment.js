@@ -1,6 +1,6 @@
 // Give your inputs here
 let number = 10;
-const subString = 101;
+const subString = 101:
 
 console.log("\nGiven number", number);
 
