@@ -1,14 +1,14 @@
-let santo = 10;
-let haider = 40;
-let jayanth = 30;
+let person1 = 10;
+let person2 = 40;
+let person3 = 30;
 
-if(jayanth> 50){
+if(person3> 50){
 
   console.log("We are rich");    
 
-}else if (((santo > 10) && (haider > 10)) || jayanth < 50){
+}else if (((person1 > 10) && (person2 > 10)) || person3 < 50){
   
-  console.log("Jayanth is poor");    
+  console.log("person3 is poor");    
 
 }else{
 
