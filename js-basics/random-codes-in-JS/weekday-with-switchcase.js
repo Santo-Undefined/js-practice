@@ -4,23 +4,23 @@ switch (day){
   
   case "Monday":
     console.log("Its is Monday");
-    // break;
+    break;
   
   case "Tuesday":
     console.log("Its is Tuesday");
-    // break;
+    break;
 
   case "Wednesday":
     console.log("Its is Wednesday");
-    // break;
+    break;
 
   case "Thursday":
     console.log("Its is Thursday");
-    // break;
+    break;
   
   case "Friday":
     console.log("Its is Friday");
-    // break;
+    break;
   
   default:
     console.log("Which universe are you in BRO!!! ");
