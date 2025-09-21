@@ -1,13 +1,14 @@
 // here we tried to implement substring and the input number as a string
 
 const InputString = "10";
-const subString = "12";
+const subString = "10";
 
-console.log("\nGiven number", InputString);
+console.log("\nGiven Input number ", InputString);
+console.log("Given sub-string to comapre", subString);
 
 // Making the given input string into a number
 let InputNumber = InputString % Infinity;
-console.log(InputNumber);
+console.log("String converted to number = ",InputNumber);
 
 // Making Binary of that number
 let InputBinary = 0;
@@ -22,10 +23,21 @@ while (InputNumber >= 1) {
   InputBinary = InputBinary + (remainder * InputBinaryMultiplier);  // Making the binary number
   InputBinaryMultiplier = InputBinaryMultiplier * 10;
 
-  console.log( InputBinary);
-
 }
 
-// Making the input binary into a string
-const InputBinaryString = "" + InputBinary;
-console.log(InputBinaryString);
+console.log("Binary value of ", InputString, "is = ", InputBinary);
+
+const subStringLength = subString.length
+const substringDivider = 10 ** subStringLength;
+// console.log("length", subStringLength)
+// console.log("Multiplier", substringDivider)
+
+while (InputBinary > 0 ){
+
+  const extractedBinary = InputBinary % substringDivider;
+
+  
+  // console.log("ex", extractedBinary) 
+  InputBinary = InputBinary / 10;
+  InputBinary = InputBinary - (InputBinary % 1);  //this removes any float values
+}
