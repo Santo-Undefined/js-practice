@@ -42,4 +42,31 @@ HOW to do it ?
 - [x] Take the input string
 - [x] Do the `%` operation to make it into number
 - [x] Do the binary operation to make it into binary
-- [x] Add it to a `""` empty string to get a `"010101"` binary string
+- [x] ~~Add it to a `""` empty string to get a `"010101"` binary string~~
+  - we are doing it with numbers for simplicity. But input is still numbers
+
+## Check the Similar Sub-string:
+- [x] Get the Sub-string
+- [x] Find its length `"String.length"`
+- [x] Get the power of the  length of string `**` operator
+
+```js
+length = String.length //Imagine lenth = 3;
+multiplier = 10 ** length //Then multiplier = 1000;
+```
+
+- [x] With this extract the last indexes from the binary string
+
+```c
+extractedBinary = binary % multiplier;
+```
+> We should get  **extractedBinary = 101**
+
+- Then we will check both the string with `===`
+- And if so we will **Increment** `count` variable
+  - Then divide `/` by `10` to remove the last digit
+  ```c
+  string = string / 10;
+  string = string - (string % 1); // to remove the floating values from the number
+  ``` 
+- [x] Repeat this till we finish our binary string
