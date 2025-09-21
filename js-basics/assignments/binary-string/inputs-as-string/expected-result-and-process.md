@@ -41,5 +41,5 @@ HOW to do it ?
 
 - [x] Take the input string
 - [x] Do the `%` operation to make it into number
-- Do the binary operation to make it into binary
-- Add it to a `""` empty string to get a `"010101"` binary string
+- [x] Do the binary operation to make it into binary
+- [x] Add it to a `""` empty string to get a `"010101"` binary string
