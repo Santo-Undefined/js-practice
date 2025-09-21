@@ -1,4 +1,36 @@
 # <span style="color:#98FB98"> Binary Sub String </span>
+## Test Cases:
+
+| Number | Substring | Binary | Answer |
+|-|-|-|-|
+|`65`|`10`|`1000001`|`1`|
+|`65`|`00`|`1000001`|`4`|
+|`21`|`101`|`10101`|`2`|
+|`31`|`11`|`11111`|`4`|
+|`8`|`01`|`1000`|`1`|
+|`19`|`1`|`10011`|`3`|
+
+### New test cases:
+
+| Number | Substring | Binary     | Answer |
+|-|-|-|-|
+| `37`  | `01`   | `100101`    | `2` |
+| `42`  | `101`  | `101010`    | `2` |
+| `58`  | `00`   | `111010`    | `0` |
+| `73`  | `11`   | `1001001`   | `0` |
+| `85`  | `010`  | `1010101`   | `2` |
+| `99`  | `001`  | `1100011`   | `1` |
+| `120` | `111`  | `1111000`   | `2` |
+| `133` | `01`   | `10000101`  | `2` |
+| `147` | `000`  | `10010011`  | `0` |
+| `156` | `1`    | `10011100`  | `4` |
+| `177` | `01`   | `10110001`  | `2` |
+| `188` | `100`  | `10111100`  | `1` |
+| `199` | `11`   | `11000111`  | `3` |
+| `205` | `101`  | `11001101`  | `1` |
+| `222` | `01`   | `11011110`  | `1` |
+
+
 ## *EXPECTED RESULT:*
 
  |Input   | substring you get | substring to compare with | Increment |
@@ -62,11 +94,47 @@ extractedBinary = binary % multiplier;
 ```
 > We should get  **extractedBinary = 101**
 
-- Then we will check both the string with `===`
-- And if so we will **Increment** `count` variable
+- [x] Then we will check both the string with `===`
+  
+  ```js
+   Number = 37
+   Sub-string = "01"
+   Binary = 100101
+   Answer = 3
+  ```
+  -If the leading zero is missing 
+
+- [x] And if so we will **Increment** `count` variable
   - Then divide `/` by `10` to remove the last digit
   ```c
   string = string / 10;
   string = string - (string % 1); // to remove the floating values from the number
   ``` 
 - [x] Repeat this till we finish our binary string
+
+## Special cases have been considerd
+
+```js
+   Number = 37
+   Sub-string = "01"
+   Binary = 100101
+   Answer = 3
+  ```
+- In these conditiion the output should be `"2"` not `3` beacause there is no `0` in the beginning of the string
+
+- So this condition is **Wrong**
+  ```js
+    Number = 8
+    Sub-string = "01"
+    Binary = 1000
+    Answer = 1
+    ```
+  - In the inital test cases this is given by assuming the MSB will be `0`
+- This version of the code has solve it 
+  ```js
+  const stringBinary = "" + InputBinary;
+  let similaritycount = (subString[0] === "0" && stringBinary[0] === "1") ? (0-1) : 0 ;
+  ```
+  - By making a string of the binary and checking if the inital number of both sub-string and binary `0` and `1` respectively.
+  - If so `1` will be subtracted from the final output.
+- This has been verified with new test cases
