@@ -5,7 +5,11 @@ function stringSplitter(string) {
     if (string[index] === "c") {
       spilttedString = spilttedString + ",";
     }
-      spilttedString = spilttedString + string[index];
+
+    if (string[index] === "d") {
+      spilttedString = spilttedString + ",";
+    }
+    spilttedString = spilttedString + string[index];
   }
   return spilttedString;
 }
@@ -28,7 +32,7 @@ function testStrinSplitter(string, expected) {
 function testAll() {
   testStrinSplitter("a", "a");
   testStrinSplitter("ab", "ab");
-  testStrinSplitter("abc", "ab,c");
+  testStrinSplitter("abcd", "ab,c,d");
 }
 
 testAll();
