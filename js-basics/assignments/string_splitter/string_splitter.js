@@ -1,7 +1,21 @@
 
+
+function isVowel(character) {
+  const vowelString = "aeiou";
+  for (let index = 0; index < vowelString.length; index++){
+    if (vowelString[index] === character) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function stringSplitter(string) {
   let spilttedString = "";
   for (let index = 0; index < string.length; index++) {
+    const characterType = (isVowel(string[index])) ? "Vowel" : "Consonent";
+    console.log(string[index], "is", characterType);
+
     if (string[index] === "c") {
       spilttedString = spilttedString + ",";
     }
