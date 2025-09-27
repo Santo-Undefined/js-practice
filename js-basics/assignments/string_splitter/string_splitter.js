@@ -1,15 +1,22 @@
 
 function stringSplitter(string) {
-  return string;
+  let spilttedString = "";
+  for (let index = 0; index < string.length; index++) {
+    if (string[index] === "c") {
+      spilttedString = spilttedString + ",";
+    }
+      spilttedString = spilttedString + string[index];
+  }
+  return spilttedString;
 }
 
 function composeResult(string, actual, expected) {
- const result = (actual === expected) ? "✅" : "❌";
- let finalresultString = "Test " + result;
- finalresultString += " | Given Input  = " + string;
- finalresultString += " | expected  = " + expected;
- finalresultString += " | actual  = " + actual;
- return finalresultString;
+  const result = (actual === expected) ? "✅" : "❌";
+  let finalresultString = "Test " + result;
+  finalresultString += " | Given Input  = " + string;
+  finalresultString += " | expected  = " + expected;
+  finalresultString += " | actual  = " + actual;
+  return finalresultString;
 }
 
 function testStrinSplitter(string, expected) {
@@ -21,6 +28,7 @@ function testStrinSplitter(string, expected) {
 function testAll() {
   testStrinSplitter("a", "a");
   testStrinSplitter("ab", "ab");
+  testStrinSplitter("abc", "ab,c");
 }
 
 testAll();
