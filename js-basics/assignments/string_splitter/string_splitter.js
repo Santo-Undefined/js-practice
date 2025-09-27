@@ -1,6 +1,6 @@
 function isVowel(character) {
   const vowelString = "aeiou";
-  for (let index = 0; index < vowelString.length; index++){
+  for (let index = 0; index < vowelString.length; index++) {
     if (vowelString[index] === character) {
       return true;
     }
@@ -8,29 +8,25 @@ function isVowel(character) {
   return false;
 }
 
-function stringSplitter(string) {
-  let alternatingString = string[0];
+function stringSplitter(givenString) {
+  let alternatingString = givenString[0];
   let missMatchString = "";
 
-  for (let index = 1; index < string.length; index++) {
-    const currentCharacterType = isVowel(string[index]);
-    const lastCharacterType = isVowel(string[index -1]);
+  for (let index = 1; index < givenString.length; index++) {
+    const currentCharacterType = isVowel(givenString[index]);
+    const lastCharacterType = isVowel(givenString[index - 1]);
 
     if (currentCharacterType !== lastCharacterType) {
-      alternatingString = alternatingString +string[index];
+      alternatingString = alternatingString + givenString[index];
     } else {
-      missMatchString = missMatchString + "," + string[index];
+      missMatchString = missMatchString + "," + givenString[index];
     }
   }
-  
-  if (missMatchString.length === 0){
-    return alternatingString;
-  }
+
   return alternatingString + missMatchString;
 }
 
-function composeResult(string, actual, expected) {
-  const result = (actual === expected) ? "✅" : "❌";
+function composeResult(result, string, actual, expected) {
   let finalresultString = "Test " + result;
   finalresultString += " | Given Input  = " + string;
   finalresultString += " | expected  = " + expected;
@@ -38,21 +34,23 @@ function composeResult(string, actual, expected) {
   return finalresultString;
 }
 
-function testStrinSplitter(string, expected) {
-  const actual = stringSplitter(string);
-  const result = composeResult(string, actual, expected);
-  console.log(result);
+function testStringSplitter(givenString, expected) {
+  const actual = stringSplitter(givenString);
+  const result = (actual === expected) ? "✅" : "❌";
+  const finalResultString = composeResult(result, givenString, actual, expected);
+  console.log(finalResultString);
 }
 
 function testAll() {
-  testStrinSplitter("abe", "abe");
-  testStrinSplitter("abcdefg", "abef,c,d,g");
-  testStrinSplitter("abeci", "abeci");
-  testStrinSplitter("apple", "ape,p,l");
-  testStrinSplitter("there", "tere,h");
-  testStrinSplitter("hello", "helo,l");
-  testStrinSplitter("abyss", "ab,y,s,s");
-  testStrinSplitter("this", "tis,h");
+  testStringSplitter("abe", "abe");
+  testStringSplitter("abcdefg", "abef,c,d,g");
+  testStringSplitter("abeci", "abeci");
+  testStringSplitter("apple", "ape,p,l");
+  testStringSplitter("there", "tere,h");
+  testStringSplitter("hello", "helo,l");
+  testStringSplitter("abyss", "ab,y,s,s");
+  testStringSplitter("this", "tis,h");
+  testStringSplitter("poetry", "pot,e,r,y");
 }
 
 testAll();
