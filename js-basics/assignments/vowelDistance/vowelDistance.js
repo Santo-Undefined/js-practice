@@ -8,7 +8,7 @@ function isVowel(character) {
   return false;
 }
 
-function nextVowelIndex(testCase, startIndex) {
+function findNextVowelIndex(testCase, startIndex) {
   const testCaseLength = testCase.length;
   for (let index = startIndex; index < testCaseLength; index++) {
     if (isVowel(testCase[index])) {
@@ -19,8 +19,23 @@ function nextVowelIndex(testCase, startIndex) {
 }
 
 function vowelDistance(testCase) {
-  let currentVowelIndex = nextVowelIndex(testCase, 0);
-  return currentVowelIndex;
+  let currentVowelIndex = findNextVowelIndex(testCase, 0);
+  let nextVowelIndex = findNextVowelIndex(testCase, currentVowelIndex + 1);
+  let currentVowelDistance = testCase.length;
+  if (nextVowelIndex === -1) {
+    return -1;
+  }
+  while (nextVowelIndex <= testCase.length - 1) {
+
+    nextVowelIndex = findNextVowelIndex(testCase, nextVowelIndex);
+    const distance = nextVowelIndex - currentVowelIndex;
+    if (distance < currentVowelDistance) {
+      currentVowelDistance = distance;
+      currentVowelIndex = nextVowelIndex;
+    }
+    nextVowelIndex++;
+  }
+  return currentVowelDistance;
 }
 
 function composeResult(result, string, actual, expected) {
@@ -39,7 +54,9 @@ function testVowelDistance(testCase, expected) {
 }
 
 function testAll() {
-  testVowelDistance("bkjdfkja", 7);
+  testVowelDistance("ab", -1);
+  testVowelDistance("aa", 1);
+  testVowelDistance("aba", 2);
 }
 
 testAll();
