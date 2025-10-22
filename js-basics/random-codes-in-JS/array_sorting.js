@@ -1,10 +1,11 @@
-/* contract
+/* contract:
     Inputs should be given as an array of numbers
     Inputs shall not have nested arrays
     All the input numbers should be whole numbers (negative numbers are accepted)
 */
-function findSmallestElement (arr) {
-  let smallestElement =arr[0];
+
+function findSmallestElement(arr) {
+  let smallestElement = arr[0];
   for (let index = 0; index < arr.length; index++) {
     if (arr[index] < smallestElement) {
       smallestElement = arr[index];
@@ -30,7 +31,7 @@ function arraySorting(givenArr) {
     arrCopy.splice(arrCopy.indexOf(smallestElement), 1); //removing the smallest element
   }
   return sortedArr;
-}  
+}
 
 function areEqual(arr1, arr2) {
   if (arr1.length !== arr2.length) {
@@ -47,8 +48,8 @@ function areEqual(arr1, arr2) {
 
 function composeResult(description, result, parameters) {
   const resultSymbol = result ? "✅" : "❌";
-  let resultString = `Test ${resultSymbol} `
-  resultString += ` ${description}`
+  let resultString = `Test ${resultSymbol} `;
+  resultString += ` ${description}`;
   if (resultSymbol === "❌") {
     resultString += `\n\t Input    = ${parameters[0]}`;
     resultString += `\n\t Output   = ${parameters[1]}`;
@@ -57,7 +58,7 @@ function composeResult(description, result, parameters) {
   return resultString;
 }
 
-function testArraySorting(description, givenArr, expectedArr){
+function testArraySorting(description, givenArr, expectedArr) {
   const resultArr = arraySorting(givenArr);
   const isSorted = areEqual(resultArr, expectedArr);
   const testParameters = [givenArr, resultArr, expectedArr];
@@ -66,11 +67,11 @@ function testArraySorting(description, givenArr, expectedArr){
 }
 
 function main() {
-  testArraySorting("simple sorted arrays", [1,2,3], [1,2,3]);
-  testArraySorting("simple mixed arrays", [1,4,3], [1,3,4]);
+  testArraySorting("simple sorted arrays", [1, 2, 3], [1, 2, 3]);
+  testArraySorting("simple mixed arrays", [1, 4, 3], [1, 3, 4]);
   testArraySorting("empty arrays", [], []);
-  testArraySorting("negative numbers", [2,0,-12,-1], [-12,-1,0,2]);
-  testArraySorting("multiple similar elements", [2,4,1,2,2,3], [1,2,2,2,3,4]);
+  testArraySorting("negative numbers", [2, 0, -12, -1], [-12, -1, 0, 2]);
+  testArraySorting("multiple similar elements", [2, 4, 1, 2, 2, 3], [ 1, 2, 2, 2, 3, 4]);
 }
 
 main();
