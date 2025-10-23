@@ -39,6 +39,9 @@ const MORSE_CHARACTERS = [
 
 function getMorseCharacter(char) {
   const index = CHARACTERS.indexOf(char);
+  if (index === -1) {
+    return "Invalid";
+  }
   return MORSE_CHARACTERS[index];
 }
 
