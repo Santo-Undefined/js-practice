@@ -1,13 +1,13 @@
 /*  Simple morse code generator
     Run the code and see the morse code of the given data
     Morse code mainly supports uppercase
-    And letters will be separated by spaceses and word will be seperated by a /
+    And letters will be separated by spaceses and words will be seperated by a /
 
-    Currently support only for alphabets
  */
 
-const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+const CHARACTERS = `ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,?'!/()&:=+-"@ `;
 const MORSE_CHARACTERS = [
+  // Letters A–Z
   ".-",    // A
   "-...",  // B
   "-.-.",  // C
@@ -34,7 +34,36 @@ const MORSE_CHARACTERS = [
   "-..-",  // X
   "-.--",  // Y
   "--..",  // Z
-  "/"      // SPACE 
+
+  // Numbers 0–9
+  "-----", // 0
+  ".----", // 1
+  "..---", // 2
+  "...--", // 3
+  "....-", // 4
+  ".....", // 5
+  "-....", // 6
+  "--...", // 7
+  "---..", // 8
+  "----.", // 9
+
+  // Punctuation & symbols
+  ".-.-.-",  // .
+  "--..--",  // ,
+  "..--..",  // ?
+  ".----.",  // '
+  "-.-.--",  // !
+  "-..-.",   // /
+  "-.--.",   // (
+  "-.--.-",  // )
+  ".-...",   // &
+  "---...",  // :
+  "-...-",   // =
+  ".-.-.",   // +
+  "-....-",  // -
+  ".-..-.",  // "
+  ".--.-.",  // @
+  "/",       // SPACE
 ];
 
 function getMorseCharacter(char) {
