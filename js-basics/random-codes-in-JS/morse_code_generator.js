@@ -6,10 +6,50 @@
     Currently support only for alphabets
  */
 
-const ALPHABETS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+const MORSE_CHARACTERS = [
+  ".-",    // A
+  "-...",  // B
+  "-.-.",  // C
+  "-..",   // D
+  ".",     // E
+  "..-.",  // F
+  "--.",   // G
+  "....",  // H
+  "..",    // I
+  ".---",  // J
+  "-.-",   // K
+  ".-..",  // L
+  "--",    // M
+  "-.",    // N
+  "---",   // O
+  ".--.",  // P
+  "--.-",  // Q
+  ".-.",   // R
+  "...",   // S
+  "-",     // T
+  "..-",   // U
+  "...-",  // V
+  ".--",   // W
+  "-..-",  // X
+  "-.--",  // Y
+  "--..",  // Z
+  "/"      // SPACE 
+];
+
+function getMorseCharacter(char) {
+  const index = CHARACTERS.indexOf(char);
+  return MORSE_CHARACTERS[index];
+}
+
 function generateMorseCode(data) {
   const string = data.toUpperCase();
-  return string;
+  const morseCode = [];
+ 
+  for (let index = 0; index < string.length; index++) {
+    morseCode.push(getMorseCharacter(string[index]));
+  }
+  return morseCode.join(" ");
 }
 
 function main() {
