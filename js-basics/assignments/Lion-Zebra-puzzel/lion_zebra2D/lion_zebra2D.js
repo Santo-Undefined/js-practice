@@ -1,4 +1,4 @@
-const testCase = ["LZ ", "  Z"];
+const testCase = ["Z ", "  Z"];
 
 function findAnimals(testCase, animal) {
   const lionPositions = [];
@@ -17,10 +17,13 @@ function indexOfAnimals(testCase) {
   console.log("Lion ", positionOfLions);
   const positionOfZerbras = findAnimals(testCase, "Z");
   console.log("Zebra", positionOfZerbras);
+  if (positionOfLions.length === 0 || positionOfZerbras.length === 0) {
+    return null;
+  }
 }
 
 function main() {
-  indexOfAnimals(testCase);
+  console.log(indexOfAnimals(testCase));
 }
 
 main();
