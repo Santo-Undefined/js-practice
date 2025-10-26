@@ -1,4 +1,33 @@
-const testCase = ["Z ", "  Z"];
+const testCase = ["L Z", " "];
+const MAN = 'manhattan';
+const EUC = 'euclidean';
+
+function findDistance (p1, p2, metric) {
+
+  if (metric === MAN) {
+    const distance = Math.abs(p1[0] - p2[0]) + Math.abs(p1[1] - p2[1]);
+    return distance;
+  }
+
+  if (metric === EUC) {
+    const distance = Math.sqrt((p2[1] - p1[1])**2 + (p2[0] - p1[0])**2);
+    return distance;    
+  }
+}
+
+function findClosestPoint(lions, zebras, metric){
+  let smallestDistance = findDistance(lions[0], zebras[0], metric);
+  for (let lionPos = 0; lionPos < lions.length; lionPos++) {
+    for (let zerbraPos = 0; zerbraPos < zebras.length; zerbraPos++) {
+      
+      const distance = findDistance(lions[lionPos], zebras[zerbraPos], metric);
+      if (distance < smallestDistance) {
+        smallestDistance = distance;
+      }
+    }
+  }
+  return smallestDistance;
+}
 
 function findAnimals(testCase, animal) {
   const lionPositions = [];
@@ -12,18 +41,20 @@ function findAnimals(testCase, animal) {
   return lionPositions;
 };
 
-function indexOfAnimals(testCase) {
-  const positionOfLions = findAnimals(testCase, "L");
-  console.log("Lion ", positionOfLions);
-  const positionOfZerbras = findAnimals(testCase, "Z");
-  console.log("Zebra", positionOfZerbras);
-  if (positionOfLions.length === 0 || positionOfZerbras.length === 0) {
+function findShortestDist2D(savanna, metric) {
+  const positionsOfLions = findAnimals(savanna, "L");
+  const positionsOfZerbras = findAnimals(savanna, "Z");
+
+  if (positionsOfLions.length === 0 || positionsOfZerbras.length === 0) {
     return null;
   }
+
+  return findClosestPoint(positionsOfLions, positionsOfZerbras, metric);
 }
 
 function main() {
-  console.log(indexOfAnimals(testCase));
+  console.log(findShortestDist2D(testCase, MAN));
+  console.log(findShortestDist2D(testCase, EUC));
 }
 
 main();
