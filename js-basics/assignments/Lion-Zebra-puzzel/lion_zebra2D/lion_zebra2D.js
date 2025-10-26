@@ -77,9 +77,25 @@ function testFindShortestDist2D(description, savanna, metric, expected) {
   console.log(resultString);
 }
 
-function main() {
+function beautify(message) {
+  return`\n${message}\n${("-").repeat(message.length)}`;
+}
+
+function testManhattanMethod() {
+  console.log(beautify("Testing Manhattan method"));
   testFindShortestDist2D("1D savanna MAN", ["LZ"], MAN, 1);
+
+}
+
+function testEuclideanMethod() {
+  console.log(beautify("Testing Euclidean method"));
   testFindShortestDist2D("1D savanna EUC", ["LZ"], EUC, 1);
+
+}
+
+function main() {
+  testManhattanMethod();
+  testEuclideanMethod();
 }
 
 main();
