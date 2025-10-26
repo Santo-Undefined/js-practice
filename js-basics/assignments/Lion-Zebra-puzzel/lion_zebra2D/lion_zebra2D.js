@@ -6,7 +6,8 @@ function manhattanMethod(p1, p2) {
 }
 
 function euclideanMethod(p1, p2) {
-  return Math.sqrt((p2[1] - p1[1])**2 + (p2[0] - p1[0])**2);
+  const distance = Math.sqrt((p2[1] - p1[1])**2 + (p2[0] - p1[0])**2);
+  return Math.trunc(distance*10000) / 10000;
 }
 
 function findDistance (p1, p2, metric) {
@@ -84,12 +85,19 @@ function beautify(message) {
 function testManhattanMethod() {
   console.log(beautify("Testing Manhattan method"));
   testFindShortestDist2D("1D savanna MAN", ["LZ"], MAN, 1);
+  testFindShortestDist2D("1D savanna MAN", ["L   ",
+                                            "  Z ",
+                                            "   Z"], MAN, 3);
 
 }
 
 function testEuclideanMethod() {
   console.log(beautify("Testing Euclidean method"));
   testFindShortestDist2D("1D savanna EUC", ["LZ"], EUC, 1);
+  testFindShortestDist2D("1D savanna MAN", ["L   ",
+                                            "  Z ",
+                                            "   Z"], EUC, 2.236);
+
 
 }
 
