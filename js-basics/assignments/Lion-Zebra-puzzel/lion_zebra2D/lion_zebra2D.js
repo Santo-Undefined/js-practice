@@ -1,17 +1,22 @@
-const testCase = ["L Z", " "];
 const MAN = 'manhattan';
 const EUC = 'euclidean';
+
+function manhattanMethod(p1, p2) {
+  return Math.abs(p1[0] - p2[0]) + Math.abs(p1[1] - p2[1]);
+}
+
+function euclideanMethod(p1, p2) {
+  return Math.sqrt((p2[1] - p1[1])**2 + (p2[0] - p1[0])**2);
+}
 
 function findDistance (p1, p2, metric) {
 
   if (metric === MAN) {
-    const distance = Math.abs(p1[0] - p2[0]) + Math.abs(p1[1] - p2[1]);
-    return distance;
+    return manhattanMethod(p1, p2);
   }
 
   if (metric === EUC) {
-    const distance = Math.sqrt((p2[1] - p1[1])**2 + (p2[0] - p1[0])**2);
-    return distance;    
+    return euclideanMethod(p1, p2);    
   }
 }
 
@@ -52,9 +57,29 @@ function findShortestDist2D(savanna, metric) {
   return findClosestPoint(positionsOfLions, positionsOfZerbras, metric);
 }
 
+function composeResult(description, result, parameters) {
+  const resultSymbol = result ? "✅" : "❌";
+  let resultString = `Test ${resultSymbol} `;
+  resultString += ` ${description}`;
+  if (resultSymbol === "❌") {
+    resultString += `\n\t Input    = ${parameters[0]}`;
+    resultString += `\n\t Output   = ${parameters[1]}`;
+    resultString += `\n\t Expected = ${parameters[2]}`;
+  }
+  return resultString;
+}
+
+function testFindShortestDist2D(description, savanna, metric, expected) {
+  const result = findShortestDist2D(savanna, metric);
+  const isCorrect = result === expected;
+  const testParameters = [savanna, result, expected];
+  const resultString = composeResult(description, isCorrect, testParameters);
+  console.log(resultString);
+}
+
 function main() {
-  console.log(findShortestDist2D(testCase, MAN));
-  console.log(findShortestDist2D(testCase, EUC));
+  testFindShortestDist2D("1D savanna MAN", ["LZ"], MAN, 1);
+  testFindShortestDist2D("1D savanna EUC", ["LZ"], EUC, 1);
 }
 
 main();
