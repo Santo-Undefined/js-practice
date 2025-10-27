@@ -1,5 +1,5 @@
 function encode(data) {
-  return "i1e";
+  return `i${data}e`;
 }
 function composeResult(description, result, parameters) {
   const resultSymbol = result ? "✅" : "❌";
@@ -27,7 +27,10 @@ function beautify(message) {
 
 function testIntergerEncoding() {
   console.log(beautify("Testing Interger Encoding"));
-  testEncoder("one digit numbers", 1, "i1e");
+  testEncoder("one digit number 1", 1, "i1e");
+  testEncoder("one digit number 2", 2, "i2e");
+  testEncoder("Two digit number 2", 22, "i22e");
+  testEncoder("Negative number ", -22, "i-22e");
 }
 
 function main() {
