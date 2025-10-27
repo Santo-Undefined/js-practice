@@ -2,6 +2,13 @@ function encodeList(message) {
   if(message.length === 0) {
     return "le";
   }
+
+  let encodedMessage = "";
+  for (let index = 0; index < message.length; index++) {
+    encodedMessage += encode(message[index]);
+  }
+
+  return `l${encodedMessage}e`;
 }
 
 function encodeString(message) {
@@ -80,6 +87,10 @@ function testStringEncoding() {
 function testListEncoding() {
   console.log(beautify("Testing List Encoding"));
   testEncoder("empty list", [], "le");
+  testEncoder("One element string list", ["hi"], "l2:hie");
+  testEncoder("Two element string list", ["hi", "hello"], "l2:hi5:helloe");
+  testEncoder("One element number list", [1], "li1ee");
+  testEncoder("Two element number list", [1, 2], "li1ei2ee");
   console.log();
 }
 
