@@ -1,6 +1,14 @@
 function encode(data) {
-  return `i${data}e`;
+  let message = data;
+  if (typeof message === "string") {
+    return `${message.length}:${message}`;
+  }
+  
+  if (!isNaN(data * data)) {
+    return `i${data}e`;
+  }
 }
+
 function composeResult(description, result, parameters) {
   const resultSymbol = result ? "✅" : "❌";
   let resultString = `Test ${resultSymbol} `;
@@ -28,13 +36,25 @@ function beautify(message) {
 function testIntergerEncoding() {
   console.log(beautify("Testing Interger Encoding"));
   testEncoder("one digit number 1", 1, "i1e");
-  testEncoder("one digit number 2", 2, "i2e");
-  testEncoder("Two digit number 2", 22, "i22e");
+  testEncoder("Multi-digit number 123", 123, "i123e");
   testEncoder("Negative number ", -22, "i-22e");
+  testEncoder("0", 0, "i0e");
+  testEncoder("Infinty", Infinity, "iInfinitye");
+  testEncoder("Negative Infinty", -Infinity, "i-Infinitye");
 }
 
+function testStringEncoding() {
+  console.log(beautify("Testing Byte String Encoding"));
+  testEncoder("Single characters", "a", "1:a");
+  testEncoder("Double characters", "ab", "2:ab");
+  testEncoder("multi-chara byte string", "hello", "5:hello");
+  testEncoder("Empty byte string", "", "0:");
+  testEncoder("hello world", "hello world", "11:hello world");
+  testEncoder("special!@#$chars", "special!@#$chars", "16:special!@#$chars");
+}
 function main() {
   testIntergerEncoding();
+  testStringEncoding();
 }
 
 main();
