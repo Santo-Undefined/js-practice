@@ -91,6 +91,12 @@ function testListEncoding() {
   testEncoder("Two element string list", ["hi", "hello"], "l2:hi5:helloe");
   testEncoder("One element number list", [1], "li1ee");
   testEncoder("Two element number list", [1, 2], "li1ei2ee");
+  testEncoder("Mixed element list", [1, "hi"], "li1e2:hie");
+  testEncoder("Nested list with empty list", [1, []], "li1elee");
+  testEncoder("Nested list sample 1", ["apple", 123, ["banana", -5]], "l5:applei123el6:bananai-5eee");
+  testEncoder("Nested list sample 2", [0, "", ["test"]], "li0e0:l4:testee");
+  testEncoder("Nested list sample 3", ["", 0, []], "l0:i0elee");
+  testEncoder("Nested list sample 4", ["one", ["two", ["three"]]], "l3:onel3:twol5:threeeee");
   console.log();
 }
 
