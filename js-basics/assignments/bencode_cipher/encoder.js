@@ -97,6 +97,7 @@ function testListEncoding() {
   testEncoder("Nested list sample 2", [0, "", ["test"]], "li0e0:l4:testee");
   testEncoder("Nested list sample 3", ["", 0, []], "l0:i0elee");
   testEncoder("Nested list sample 4", ["one", ["two", ["three"]]], "l3:onel3:twol5:threeeee");
+  testEncoder("Nested list crazy", [[], [[]], []], "llelleelee");
   console.log();
 }
 
