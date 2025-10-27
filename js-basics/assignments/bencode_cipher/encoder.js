@@ -25,6 +25,8 @@ function findDataType(message) {
   if (typeof message === "string") { return "string"; }
 
   if (!isNaN(message * message)) { return "number"; }
+
+  if ("" + message === "NaN") { return "number"; }
 }
 
 function encode(data) {
@@ -70,6 +72,7 @@ function testIntergerEncoding() {
   testEncoder("0", 0, "i0e");
   testEncoder("Infinty", Infinity, "iInfinitye");
   testEncoder("Negative Infinty", -Infinity, "i-Infinitye");
+  testEncoder("NaN", NaN, "iNaNe");
   console.log();
 }
 
@@ -98,6 +101,7 @@ function testListEncoding() {
   testEncoder("Nested list sample 3", ["", 0, []], "l0:i0elee");
   testEncoder("Nested list sample 4", ["one", ["two", ["three"]]], "l3:onel3:twol5:threeeee");
   testEncoder("Nested list crazy", [[], [[]], []], "llelleelee");
+  testEncoder("Nested list with NaN", [[NaN], [[]], []], "lliNaNeelleelee");
   console.log();
 }
 
