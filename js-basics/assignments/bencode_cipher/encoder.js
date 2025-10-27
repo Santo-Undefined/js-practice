@@ -1,11 +1,33 @@
+function encodeList(message) {
+  if(message.length === 0) {
+    return "le";
+  }
+}
+
+function encodeString(message) {
+  return `${message.length}:${message}`;
+}
+
+function encodeNumber(message) {
+  return `i${message}e`;
+}
+
+function findDataType(message) {
+  if (typeof message === "object") { return "object"; }
+
+  if (typeof message === "string") { return "string"; }
+
+  if (!isNaN(message * message)) { return "number"; }
+}
+
 function encode(data) {
   let message = data;
-  if (typeof message === "string") {
-    return `${message.length}:${message}`;
-  }
-  
-  if (!isNaN(data * data)) {
-    return `i${data}e`;
+  const messageType = findDataType(message);
+
+  switch (messageType) {
+    case "number": return encodeNumber(message);
+    case "string": return encodeString(message);
+    case "object": return encodeList(message);
   }
 }
 
@@ -30,7 +52,7 @@ function testEncoder(description, data, expected) {
 }
 
 function beautify(message) {
-  return`\n${message}\n${("-").repeat(message.length)}`;
+  return`${message}\n${("-").repeat(message.length)}`;
 }
 
 function testIntergerEncoding() {
@@ -41,6 +63,7 @@ function testIntergerEncoding() {
   testEncoder("0", 0, "i0e");
   testEncoder("Infinty", Infinity, "iInfinitye");
   testEncoder("Negative Infinty", -Infinity, "i-Infinitye");
+  console.log();
 }
 
 function testStringEncoding() {
@@ -51,10 +74,19 @@ function testStringEncoding() {
   testEncoder("Empty byte string", "", "0:");
   testEncoder("hello world", "hello world", "11:hello world");
   testEncoder("special!@#$chars", "special!@#$chars", "16:special!@#$chars");
+  console.log();
 }
+
+function testListEncoding() {
+  console.log(beautify("Testing List Encoding"));
+  testEncoder("empty list", [], "le");
+  console.log();
+}
+
 function main() {
   testIntergerEncoding();
   testStringEncoding();
+  testListEncoding();
 }
 
 main();
