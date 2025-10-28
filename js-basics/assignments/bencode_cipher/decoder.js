@@ -1,8 +1,10 @@
-function decodeInteger (message) {
-  if (message === "NaN") {
-    return NaN;
-  }
+function decodeString(message) {
+  const nextIndexOfcolon =  1 + message.indexOf(":");
+  const messageLength = +message.slice(0, nextIndexOfcolon - 1);
+  return message.slice(nextIndexOfcolon, nextIndexOfcolon + messageLength);
+}
 
+function decodeInteger(message) {
   return +message.slice(1, message.length - 1);
 }
 
@@ -11,7 +13,7 @@ function decodeDataType(data) {
 
   if (data === "i") { return "number"; }
 
-  if (typeof data === "number") { return "string"; }
+  if (typeof +data === "number") { return "string"; }
 }
 
 function decode(data) {
@@ -50,20 +52,32 @@ function testDecoder(description, data, expected) {
   console.log(resultString);
 }
 
+function testStringDecoding() {
+  console.log(beautify("Testing String Decoding"));
+  testDecoder("a", "1:a", "a");
+  testDecoder("hello", "5:hello", "hello");
+  testDecoder("Empty string", "0:", "");
+  testDecoder("9 characters", "9:Hello bro", "Hello bro");
+  testDecoder("Hello world", "11:Hello world", "Hello world");
+  testDecoder("special!@#$chars", "16:special!@#$chars", "special!@#$chars");
+  testDecoder("length over 100", "104:Hello there how are you and I am santo and now I am making the decoder code for the bencode cipher code", "Hello there how are you and I am santo and now I am making the decoder code for the bencode cipher code");
+  console.log();
+}
+
 function testIntergerDecoding() {
-  console.log(beautify("Testing List Decoding"));
+  console.log(beautify("Testing Integer Decoding"));
   testDecoder("numbers 1", "i1e", 1);
   testDecoder("numbers 12", "i12e", 12);
+  testDecoder("negative numbers -12", "i-12e", -12);
+  testDecoder("0", "i0e", 0);
   testDecoder("scientific terms", "i10e3e", 10E3);
   testDecoder("floating values", "i3.14e", 3.14);
-  // testDecoder("NaN", "iNaNe", NaN);
   console.log();
 }
 
 function testDecoding() {
   testIntergerDecoding();
-  // testStringDecoding();
-  // testListDecoding();
+  testStringDecoding();
 }
 
 function main() {
