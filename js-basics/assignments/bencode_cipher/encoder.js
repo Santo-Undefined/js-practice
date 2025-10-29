@@ -20,13 +20,7 @@ function encodeNumber(message) {
 }
 
 function findDataType(message) {
-  if (Array.isArray(message)) { return "array"; }
-
-  if (typeof message === "string") { return "string"; }
-
-  if (!isNaN(message * message)) { return "number"; }
-
-  if ("" + message === "NaN") { return "number"; }
+  return Array.isArray(message) ? "array" : typeof message;
 }
 
 function encode(data) {
