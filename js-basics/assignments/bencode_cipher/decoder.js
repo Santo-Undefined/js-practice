@@ -40,30 +40,18 @@ function encode(data) {
   }
 }
 
-function removeLastData(message, decodedList) {
-  const lastIndexOfDecode = decodedList.length - 1
-  const lenOfLastData = encode(decodedList[lastIndexOfDecode]).length;
-  return message.slice(lenOfLastData);
-
-}
-
-function decodeList(message, list) {
-  let messageCopy = message;
-  if(messageCopy[0] === "e") {
-    return [messageCopy, list];
-  }
+function decodeList(message) {
+  let index = 1;
   const decodedList = [];
-  while(messageCopy.length > 1) {
-    const data = decode(messageCopy);
-    if(data !== undefined) {
-      decodedList.push(data);
-      messageCopy = removeLastData(messageCopy, decodedList);
-    } else {
-      messageCopy = removeLastData(messageCopy, "e");
-    }
-  }
 
-  return [messageCopy,decodedList];
+  while(message[index] !== "e") {
+    const moddedMessage = message.slice(index);
+    const decodedData = decode(moddedMessage);
+    decodedList.push(decodedData);
+    const lastDataLength = encode(decodedData).length;
+    index += lastDataLength;
+  }
+  return decodedList;
 }
 
 function decodeString(message) {
@@ -84,8 +72,6 @@ function decodeInteger(message) {
 function decodeDataType(data) {
   if (data === "l") { return "list"; }
   
-  if (data === "e") { return "e"; }
-
   if (data === "i") { return "number"; }
 
   if (typeof +data === "number") { return "string"; }
@@ -98,8 +84,7 @@ function decode(data) {
   switch (dataType) {
     case "number": return decodeInteger(message);
     case "string": return decodeString(message);
-    case "list": return decodeList(message.slice(1), [])[1];
-    case "e": return ;
+    case "list": return decodeList(message);
     default : return "DataError"
   }
 }
@@ -171,6 +156,10 @@ function testListDecoding() {
   testDecoder("Nested list sample 4", "l3:onel3:twol5:threeeee", ["one", ["two", ["three"]]]);
   testDecoder("Simple nest list", "llee", [[]]);
   testDecoder("double nest list", "llelee", [[],[]]);
+  testDecoder("triple nest list", "llelelee", [[],[],[]]);
+  testDecoder("Nested list crazy", "lli1eelli1eeeli1eee", [[1], [[1]], [1]]);
+	testDecoder('deep nest list', "l3:appi-89elli-590067e6:wordlei893421eelei-12222223eel19:apple wordle wordleei0el0:leee", ['app', -89, [[-590067, 'wordle', 893421], [], -12222223], ['apple wordle wordle'], 0, ['', []]]);
+
   console.log();
 }
 
