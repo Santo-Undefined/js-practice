@@ -12,7 +12,7 @@ const su_ = function (arg) {       // switch user
   }
 }
 const cd = function (arg) {
-  if (arg === "cd"){
+  if (arg === ""){
     DIRECTORY = DIRECTORY_LIST[0];
     return;
   }
@@ -23,8 +23,12 @@ const cd = function (arg) {
     DIRECTORY = arg;
   }
 }
-const cmdError = function(arg) {   // if the command is not found
-  console.log("zsh: command not found: ",arg);
+const mkdir = function (arg) {
+  DIRECTORY_LIST.push([arg])
+  console.log(DIRECTORY_LIST);
+}
+const cmdError = function(arg, cmd) {   // if the command is not found
+  console.log("zsh: command not found: ",cmd);
 }
 
 function findcmdDef(cmd) {
@@ -32,6 +36,7 @@ function findcmdDef(cmd) {
     case "": return function(){}; //empty enter
     case "su-": return su_;
     case "cd" : return cd;
+    case "mkdir" : return mkdir;
     case "cls":
     case "clear": return function() {console.clear();}
     default: return cmdError;
@@ -40,16 +45,18 @@ function findcmdDef(cmd) {
 
 function excuteCommand(cmd, args) {
   const cmdDef = findcmdDef(cmd);
-  return cmdDef(args);
+  return cmdDef(args, cmd);
 }
 
 function spiltUsrInput(input){
   const usrCmd = input.trim();
-  if(!usrCmd.includes(" ")) {
-    return [usrCmd, usrCmd]
+  
+  let cmd = usrCmd;
+  let arg = "";
+  if (usrCmd.includes(" ")) {
+    cmd = usrCmd.slice(0, usrCmd.indexOf(" "))
+    arg = usrCmd.slice(usrCmd.indexOf(" ") + 1);
   }
-  const cmd = usrCmd.slice(0, usrCmd.indexOf(" "))
-  const arg = usrCmd.slice(usrCmd.indexOf(" ") + 1)
   return [cmd, arg];
 }
 
