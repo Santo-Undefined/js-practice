@@ -1,17 +1,27 @@
 const USER_LIST = ["root", "santo", "admin"]
 let USER = USER_LIST[0];
-const DIRECTORY = "folder";
+const DIRECTORY_LIST = ["dir1", "dir2", "dir3"]
+let DIRECTORY = DIRECTORY_LIST[0];
 
 const su_ = function (arg) {       // switch user
-    if (!USER_LIST.includes(arg)){
-      console.log("su: unknown login: ",arg);
-    } 
-    else {
-      USER = arg;
-    }
+  if (!USER_LIST.includes(arg)){
+    console.log("su: unknown login: ",arg);
+  } 
+  else {
+    USER = arg;
+  }
 }
-const clear = function() {
-  console.clear();
+const cd = function (arg) {
+  if (arg === "cd"){
+    DIRECTORY = DIRECTORY_LIST[0];
+    return;
+  }
+  if (!DIRECTORY_LIST.includes(arg)){
+    console.log("cd: no such file or directory: ",arg);
+  } 
+  else {
+    DIRECTORY = arg;
+  }
 }
 const cmdError = function(arg) {   // if the command is not found
   console.log("zsh: command not found: ",arg);
@@ -19,8 +29,11 @@ const cmdError = function(arg) {   // if the command is not found
 
 function findcmdDef(cmd) {
   switch (cmd) {
+    case "": return function(){}; //empty enter
     case "su-": return su_;
-    case "clear": return clear;
+    case "cd" : return cd;
+    case "cls":
+    case "clear": return function() {console.clear();}
     default: return cmdError;
   }
 }
