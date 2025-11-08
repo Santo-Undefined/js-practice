@@ -14,4 +14,5 @@ function length(array) {
   return index
 }
 
-console.log(length(array));
+console.log("Self implemented function output", length(array));
+console.log("Built-in function output", array.length);
