@@ -8,7 +8,7 @@ Here I am trying to implement all the default array functions that we use in `Ja
 |Function           |Use  |
 |-                  |-    |
 |`.length`          | Finds the length of the array   |
-|`.concat`          |-    |
+|`.concat`          | Concatinates value to the end of an Array    |
 |`.findIndex`       |-    |
 |`.findLastIndex`   |-    |
 |`.lastIndexOf`     |-    |
