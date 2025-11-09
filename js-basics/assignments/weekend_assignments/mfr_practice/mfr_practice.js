@@ -2,38 +2,56 @@
 // based on count
 const festive_ribbon = ["red", "blue", "red", "green", "red", "blue"];
 const libraryReturnCount = ["Dune", "Dune", "Foundation", "Dune"];
-const wildLifeSighting = ["deer", "deer", "rabbit", "deer"]
+const wildLifeSighting = ["deer", "deer", "rabbit", "deer"];
 
 //  Unique list
-const stargazingLog = [["Orion", "Leo"], ["Taurus"], ["Orion", "Gemini"]]
+const stargazingLog = [["Orion", "Leo"], ["Taurus"], ["Orion", "Gemini"]];
 const birdWatch = ["sparrow", "crow", "sparrow", "eagle", "crow"];
-const classRoomAttendence = [["Asha", "Ravi", "Neel"], ["Ravi"], ["Asha", "Meera"]]
-const artWorkshop = [["blue", "yellow"], ["yellow", "green"], ["blue"]]
-const lunchBoxIngredients = [["rice", "lentils"], ["rice"], ["curd", "lentils"]]
-const parcelSize = ["small", "large", "medium", "small"]
+const classRoomAttendence = [["Asha", "Ravi", "Neel"], ["Ravi"], ["Asha", "Meera"]];
+const artWorkshop = [["blue", "yellow"], ["yellow", "green"], ["blue"]];
+const lunchBoxIngredients = [["rice", "lentils"], ["rice"], ["curd", "lentils"]];
+const parcelSize = ["small", "large", "medium", "small"];
 
 //  Add all elements
-const candyJar = [[5, 3], [2], [4, 1]]
-const fitnessTracker = [[2, 3, 2], [4], [1, 1]]
-const vegetableCrate =[[4, 6], [2, 3, 1], [5]]
-const chaptersCompleted = [[1, 2], [3], [2, 4, 1]]
+const candyJar = [[5, 3], [2], [4, 1]];
+const fitnessTracker = [[2, 3, 2], [4], [1, 1]];
+const vegetableCrate =[[4, 6], [2, 3, 1], [5]];
+const chaptersCompleted = [[1, 2], [3], [2, 4, 1]];
 
 // questions based on .some
-const musicRehersalNotes = [["mi", "fa", "so"], ["do", "mi"], ["fa"]]
-const choirHarmony = [["la", "la"], ["mi"], ["so", "la"]]
+const musicRehersalNotes = [["mi", "fa", "so"], ["do", "mi"], ["fa"]];
+const choirHarmony = [["la", "la"], ["mi"], ["so", "la"]];
 
 // questions where you check all elements wrt to a threshold
-const weatherSensor = [[22, 23], [25, 24, 22], [29]]
+const weatherSensor = [[22, 23], [25, 24, 22], [29]];
 
+// questions with custom pericate
+const danceClassSteps = [["step", "tap"], ["turn", "step"]]
+const sentences = ['just a phrase', 'also another phrase', 'arbitrary phrase', 'An interesting phrase'];
+
+const getAwords = (array) => {
+  const words = array.flatMap((sentence) => sentence.split(" ")).reduce(
+    (result, word) => {
+      if (word[0] === "a" || word[0] === "A") {
+        result.push(word);
+      }
+      return result
+    }, [])
+  return words;
+}
+
+const checkDanceStep = function (array) {
+  return array.some((steps => steps.some(element => element === "step")))
+}
 
 const countElements = (array, element) => {
-  return array.flat().reduce((result, value) => {
+  return array.flatMap(x => x).reduce((result, value) => {
     return value === element ? result + 1 : result;
   }, 0)
 }
 
 const getUniqueElementsList = (array) => {
-  return array.flat().reduce((result, element) => { 
+  return array.flatMap(x => x).reduce((result, element) => { 
     if (!result.includes(element)) {
       result.push(element)
     } 
@@ -43,7 +61,7 @@ const getUniqueElementsList = (array) => {
 }
 
 const addElementValues = (array) => {
-  return array.flat().reduce((result, element) => result + element)
+  return array.flatMap(x => x).reduce((result, element) => result + element)
 }
 
 const isElementPresent = (array, element) => {
@@ -156,12 +174,20 @@ function testIsAllValueBelowThreshold() {   // example for every
   underline("");  
 }
 
-const main = () => {
+function testCustomPerdicates () {
+  underline("Custom perdicate test experiments")
+  console.log("Check if dance steps contain \'step\'", checkDanceStep(danceClassSteps))
+
+  underline("")
+}
+
+const main = function () {
   testCountElement();
   testGetUniqueElementList();
   testAddElementValues();
   testIsElementPresent();
   testIsAllValueBelowThreshold();
+  testCustomPerdicates();
 }
 
 main();
