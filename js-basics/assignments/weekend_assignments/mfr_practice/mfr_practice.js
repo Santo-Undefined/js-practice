@@ -26,36 +26,28 @@ const choirHarmony = [["la", "la"], ["mi"], ["so", "la"]]
 const weatherSensor = [[22, 23], [25, 24, 22], [29]]
 
 
-
-
 const countElements = (array, element) => {
-  const count = array.flat().reduce((result, value) => {
+  return array.flat().reduce((result, value) => {
     return value === element ? result + 1 : result;
   }, 0)
-  return count
 }
 
 const getUniqueElementsList = (array) => {
-  const flatArray = array.flat()
-  const result = flatArray.reduce((result, element) => {
+  return array.flat().reduce((result, element) => { 
     if (!result.includes(element)) {
-        result.push(element)
-      }
-    return result},
+      result.push(element)
+    } 
+    return result
+  },
     [])
-  return result
 }
 
 const addElementValues = (array) => {
-  const flatArray = array.flat()
-  const total = flatArray.reduce((result, element) => result + element)
-  return total
+  return array.flat().reduce((result, element) => result + element)
 }
 
 const isElementPresent = (array, element) => {
-  const flatArray = array.flat();
-  const result = flatArray.some((value) => value === element);
-  return result
+ return array.flat().some((value) => value === element);
 }
 
 const isAllBelowThreshold = (array, threshold) => {
@@ -114,7 +106,7 @@ function test(testType, description, input, expected, condition) {
 
 
 function testCountElement() {
-  const testType = countElements;
+  const testType = countElements;           // example of reduce
   underline("Testing questions which needs count of elements");
   test(testType, "count blue ribbons cut", festive_ribbon, 2, "blue");
   test(testType, "How many time Dune was returned", libraryReturnCount, 3, "Dune");
@@ -123,7 +115,7 @@ function testCountElement() {
   underline("");
 }
 
-function testGetUniqueElementList() {
+function testGetUniqueElementList() {       // example for reduce
   const testType = getUniqueElementsList;
   underline("Testing questions which needs list of unique elements");
   test(testType, "stargazingLog", stargazingLog, ["Orion", "Leo", "Taurus", "Gemini"]);
@@ -136,7 +128,7 @@ function testGetUniqueElementList() {
   underline("");
 }
 
-function testAddElementValues() {
+function testAddElementValues() {           // example for reduce
   const testType = addElementValues;
   underline("Testing questions which needs the total values of all elements");
   test(testType, "count number of refills for candy jar", candyJar, 15);
@@ -147,7 +139,7 @@ function testAddElementValues() {
   underline("");
 }
 
-function testIsElementPresent() {
+function testIsElementPresent() {           // example for some
   const testType = isElementPresent;
   underline("Testing questions which checks if a element is present");
   test(testType, "Musical notes is \"do\" present", musicRehersalNotes, true, "do");
@@ -156,7 +148,7 @@ function testIsElementPresent() {
   underline("");  
 }
 
-function testIsAllValueBelowThreshold() {
+function testIsAllValueBelowThreshold() {   // example for every
   const testType = isAllBelowThreshold;
   underline("Testing questions which checks all elements are below a certian threshold");
   test(testType, "check if all temperature are below 32", weatherSensor, true, 32);
