@@ -1,7 +1,7 @@
 /* array.concat(<value>)
    ---------------------
   This function concatinates any element/value you provide 
-  to the end of the array
+  to the end of the array`
   And increments the highest index value 
 
   The provided implementation may be inaccurate for certain
