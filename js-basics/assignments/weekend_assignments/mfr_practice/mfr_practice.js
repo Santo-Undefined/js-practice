@@ -3,10 +3,16 @@
 // based on count
 const festive_ribbon = ["red", "blue", "red", "green", "red", "blue"];
 
+//  Unique list
 const stargazingLog = [["Orion", "Leo"], ["Taurus"], ["Orion", "Gemini"]]
+const birdWatch = ["sparrow", "crow", "sparrow", "eagle", "crow"];
+const classRoomAttendence = [["Asha", "Ravi", "Neel"], ["Ravi"], ["Asha", "Meera"]]
 
+//  Add all elements
+const candyJar = [[5, 3], [2], [4, 1]]
 
-
+// questions based on .some
+const musicRehersalNotes = [["mi", "fa", "so"], ["do", "mi"], ["fa"]]
 
 const countElements = (array, element) => {
   const count = array.flat().reduce((result, value) => {
@@ -26,6 +32,17 @@ const getUniqueElementsList = (array) => {
   return result
 }
 
+const addElementValues = (array) => {
+  const flatArray = array.flat()
+  const total = flatArray.reduce((result, element) => result + element)
+  return total
+}
+
+const isElementPresent = (array, element) => {
+  const flatArray = array.flat();
+  const result = flatArray.some((value) => value === element);
+  return result
+}
 
 
 
@@ -78,16 +95,44 @@ function test(testType, description, input, expected, element) {
 
 
 function testCountElement() {
-  const testType = countElements
+  const testType = countElements;
   underline("Testing questions which needs count of elements");
   test(testType, "count blue ribbons cut", festive_ribbon, 2, "blue");
-  test(getUniqueElementsList, "stargazingLog", stargazingLog, ["Orion", "Leo", "Taurus", "Gemini"]);
 
   underline("");
 }
 
+function testGetUniqueElementList() {
+  const testType = getUniqueElementsList;
+  underline("Testing questions which needs list of unique elements");
+  test(testType, "stargazingLog", stargazingLog, ["Orion", "Leo", "Taurus", "Gemini"]);
+  test(testType, "Bird watch", birdWatch, ["sparrow", "crow", "eagle"]);
+  test(testType, "Classroom attendence check", classRoomAttendence, ["Asha", "Ravi", "Neel", "Meera"]);
+
+  underline("");
+}
+
+function testAddElementValues() {
+  const testType = addElementValues;
+  underline("Testing questions which needs the total values of all elements");
+  test(testType, "count number of refills for candy jar", candyJar, 15);
+
+  underline("");
+}
+
+function testIsElementPresent() {
+  const testType = isElementPresent;
+  underline("Testing questions which checks if a element is present");
+  test(testType, "Musical notes is \"do\" present", musicRehersalNotes, true, "do");
+
+  underline("");  
+}
 const main = () => {
   testCountElement();
+  testGetUniqueElementList();
+  testAddElementValues();
+  testIsElementPresent();
+
 }
 
 main();
