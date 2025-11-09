@@ -1,18 +1,26 @@
-// Questions
-
+/* Questions */
 // based on count
 const festive_ribbon = ["red", "blue", "red", "green", "red", "blue"];
+const libraryReturnCount = ["Dune", "Dune", "Foundation", "Dune"];
+const wildLifeSighting = ["deer", "deer", "rabbit", "deer"]
 
 //  Unique list
 const stargazingLog = [["Orion", "Leo"], ["Taurus"], ["Orion", "Gemini"]]
 const birdWatch = ["sparrow", "crow", "sparrow", "eagle", "crow"];
 const classRoomAttendence = [["Asha", "Ravi", "Neel"], ["Ravi"], ["Asha", "Meera"]]
+const artWorkshop = [["blue", "yellow"], ["yellow", "green"], ["blue"]]
+const lunchBoxIngredients = [["rice", "lentils"], ["rice"], ["curd", "lentils"]]
+const parcelSize = ["small", "large", "medium", "small"]
 
 //  Add all elements
 const candyJar = [[5, 3], [2], [4, 1]]
+const fitnessTracker = [[2, 3, 2], [4], [1, 1]]
+const vegetableCrate =[[4, 6], [2, 3, 1], [5]]
+const chaptersCompleted = [[1, 2], [3], [2, 4, 1]]
 
 // questions based on .some
 const musicRehersalNotes = [["mi", "fa", "so"], ["do", "mi"], ["fa"]]
+const choirHarmony = [["la", "la"], ["mi"], ["so", "la"]]
 
 // questions where you check all elements wrt to a threshold
 const weatherSensor = [[22, 23], [25, 24, 22], [29]]
@@ -109,6 +117,8 @@ function testCountElement() {
   const testType = countElements;
   underline("Testing questions which needs count of elements");
   test(testType, "count blue ribbons cut", festive_ribbon, 2, "blue");
+  test(testType, "How many time Dune was returned", libraryReturnCount, 3, "Dune");
+  test(testType, "How many time deer was spotted", wildLifeSighting, 3, "deer");
 
   underline("");
 }
@@ -119,6 +129,9 @@ function testGetUniqueElementList() {
   test(testType, "stargazingLog", stargazingLog, ["Orion", "Leo", "Taurus", "Gemini"]);
   test(testType, "Bird watch", birdWatch, ["sparrow", "crow", "eagle"]);
   test(testType, "Classroom attendence check", classRoomAttendence, ["Asha", "Ravi", "Neel", "Meera"]);
+  test(testType, "Get unique colours", artWorkshop, ["blue", "yellow", "green"]);
+  test(testType, "Get unique lunch box Ingredients", lunchBoxIngredients, ["rice", "lentils", "curd"]);
+  test(testType, "Get unique parcel size", parcelSize, ["small", "large", "medium"]);
 
   underline("");
 }
@@ -127,6 +140,9 @@ function testAddElementValues() {
   const testType = addElementValues;
   underline("Testing questions which needs the total values of all elements");
   test(testType, "count number of refills for candy jar", candyJar, 15);
+  test(testType, "Fitness tracker total distance covered", fitnessTracker, 13);
+  test(testType, "Total weight of vegetable crate", vegetableCrate, 21);
+  test(testType, "Total chapters completed by the students", chaptersCompleted, 13);
 
   underline("");
 }
@@ -135,6 +151,7 @@ function testIsElementPresent() {
   const testType = isElementPresent;
   underline("Testing questions which checks if a element is present");
   test(testType, "Musical notes is \"do\" present", musicRehersalNotes, true, "do");
+  test(testType, "Any group said \"so\"", choirHarmony, true, "so");
 
   underline("");  
 }
