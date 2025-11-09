@@ -28,21 +28,21 @@ const weatherSensor = [[22, 23], [25, 24, 22], [29]];
 // questions with custom pericate
 const danceClassSteps = [["step", "tap"], ["turn", "step"]]
 const sentences = ['just a phrase', 'also another phrase', 'arbitrary phrase', 'An interesting phrase'];
-const numberList = [1,2,3,4,1,2] //[[1,2],[2,2],[3,1],[4,1]]
+const numberList = [1,2,3,4,1,2] //output = [[1,2],[2,2],[3,1],[4,1]]
 
-const uniqueNumberList = (acc, val) => {
-  if (!acc.includes(val)) {
-    acc.push(val)
-  }
+const uniqueNumbers = (acc, val) => {
+  if (!acc.includes(val)) {acc.push(val)}
   return acc
 }
+const countNumbers = (list, number) => 
+  list.reduce((acc, val) => val === number ? acc + 1 : acc, 0)
 
 const countFrequencyOfNumbers = numbers => {
-  const uniqueNumbers = numbers.reduce(uniqueNumberList, [])
-  const getFrequeny = uniqueNumbers.map(number => 
-    [number, countElements(numbers, number)])
-  return getFrequeny
+  const numberList = numbers.reduce(uniqueNumbers, [])
+  const getFrequency = numberList.map(number => [number, countNumbers(numbers, number)])
+  return getFrequency
 }
+
 // const countFrequency = numbers => {
 //    return numbers.reduce((result, number, index, array) => {
 //     if (!result.includes(number)) {
