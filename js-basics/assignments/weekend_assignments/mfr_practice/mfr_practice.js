@@ -14,6 +14,12 @@ const candyJar = [[5, 3], [2], [4, 1]]
 // questions based on .some
 const musicRehersalNotes = [["mi", "fa", "so"], ["do", "mi"], ["fa"]]
 
+// questions where you check all elements wrt to a threshold
+const weatherSensor = [[22, 23], [25, 24, 22], [29]]
+
+
+
+
 const countElements = (array, element) => {
   const count = array.flat().reduce((result, value) => {
     return value === element ? result + 1 : result;
@@ -44,6 +50,11 @@ const isElementPresent = (array, element) => {
   return result
 }
 
+const isAllBelowThreshold = (array, threshold) => {
+  const flatArray = array.flat();
+  const result = flatArray.every((value) => value < threshold);
+  return result;
+}
 
 
 function composeResult(description, result, parameters) {
@@ -85,8 +96,8 @@ function areEqual(array1, array2) {
   return array1 === array2;
 }
 
-function test(testType, description, input, expected, element) {
-  const result = testType(input, element);
+function test(testType, description, input, expected, condition) {
+  const result = testType(input, condition);
   const isCorrect = areEqual(result, expected);
   const testParameters = [input, result, expected];
   const resultString = composeResult(description, isCorrect, testParameters);
@@ -127,12 +138,21 @@ function testIsElementPresent() {
 
   underline("");  
 }
+
+function testIsAllValueBelowThreshold() {
+  const testType = isAllBelowThreshold;
+  underline("Testing questions which checks all elements are below a certian threshold");
+  test(testType, "check if all temperature are below 32", weatherSensor, true, 32);
+
+  underline("");  
+}
+
 const main = () => {
   testCountElement();
   testGetUniqueElementList();
   testAddElementValues();
   testIsElementPresent();
-
+  testIsAllValueBelowThreshold();
 }
 
 main();
