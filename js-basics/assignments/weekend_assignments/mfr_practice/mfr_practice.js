@@ -15,6 +15,17 @@ const countElements = (array, element) => {
   return count
 }
 
+const getUniqueElementsList = (array) => {
+  const flatArray = array.flat()
+  const result = flatArray.reduce((result, element) => {
+    if (!result.includes(element)) {
+        result.push(element)
+      }
+    return result},
+    [])
+  return result
+}
+
 
 
 
@@ -57,7 +68,7 @@ function areEqual(array1, array2) {
   return array1 === array2;
 }
 
-function test(testType, description, input, element, expected) {
+function test(testType, description, input, expected, element) {
   const result = testType(input, element);
   const isCorrect = areEqual(result, expected);
   const testParameters = [input, result, expected];
@@ -69,7 +80,8 @@ function test(testType, description, input, element, expected) {
 function testCountElement() {
   const testType = countElements
   underline("Testing questions which needs count of elements");
-  test(testType, "count blue ribbons cut", festive_ribbon, "blue", 2);
+  test(testType, "count blue ribbons cut", festive_ribbon, 2, "blue");
+  test(getUniqueElementsList, "stargazingLog", stargazingLog, ["Orion", "Leo", "Taurus", "Gemini"]);
 
   underline("");
 }
