@@ -29,16 +29,11 @@ const weatherSensor = [[22, 23], [25, 24, 22], [29]];
 const danceClassSteps = [["step", "tap"], ["turn", "step"]]
 const sentences = ['just a phrase', 'also another phrase', 'arbitrary phrase', 'An interesting phrase'];
 
-const getAwords = (array) => {
-  const words = array.flatMap((sentence) => sentence.split(" ")).reduce(
-    (result, word) => {
-      if (word[0] === "a" || word[0] === "A") {
-        result.push(word);
-      }
-      return result
-    }, [])
-  return words;
-}
+const getAwords = phrases => 
+  phrases
+    .flatMap(sentence => sentence.split(" "))
+    .filter(word => word.toLowerCase()[0] === "a")
+
 
 const checkDanceStep = function (array) {
   return array.some((steps => steps.some(element => element === "step")))
@@ -177,7 +172,7 @@ function testIsAllValueBelowThreshold() {   // example for every
 function testCustomPerdicates () {
   underline("Custom perdicate test experiments")
   console.log("Check if dance steps contain \'step\'", checkDanceStep(danceClassSteps))
-
+  console.log("Get elements with words starting with \"A\" or \"a\"", getAwords(sentences))
   underline("")
 }
 
