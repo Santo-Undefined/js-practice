@@ -1,21 +1,26 @@
 /* Questions */
 // based on count
 const festive_ribbon = ["red", "blue", "red", "green", "red", "blue"];
-const libraryReturnCount = ["Dune", "Dune", "Foundation", "Dune"];
 const wildLifeSighting = ["deer", "deer", "rabbit", "deer"];
 
 //  Unique list
 const stargazingLog = [["Orion", "Leo"], ["Taurus"], ["Orion", "Gemini"]];
 const birdWatch = ["sparrow", "crow", "sparrow", "eagle", "crow"];
-const classRoomAttendence = [["Asha", "Ravi", "Neel"], ["Ravi"], ["Asha", "Meera"]];
+const classRoomAttendence = [["Asha", "Ravi", "Neel"], ["Ravi"], [
+  "Asha",
+  "Meera",
+]];
 const artWorkshop = [["blue", "yellow"], ["yellow", "green"], ["blue"]];
-const lunchBoxIngredients = [["rice", "lentils"], ["rice"], ["curd", "lentils"]];
+const lunchBoxIngredients = [["rice", "lentils"], ["rice"], [
+  "curd",
+  "lentils",
+]];
 const parcelSize = ["small", "large", "medium", "small"];
 
 //  Add all elements
 const candyJar = [[5, 3], [2], [4, 1]];
 const fitnessTracker = [[2, 3, 2], [4], [1, 1]];
-const vegetableCrate =[[4, 6], [2, 3, 1], [5]];
+const vegetableCrate = [[4, 6], [2, 3, 1], [5]];
 const chaptersCompleted = [[1, 2], [3], [2, 4, 1]];
 
 // questions based on .some
@@ -26,72 +31,75 @@ const choirHarmony = [["la", "la"], ["mi"], ["so", "la"]];
 const weatherSensor = [[22, 23], [25, 24, 22], [29]];
 
 // questions with custom pericate
-const danceClassSteps = [["step", "tap"], ["turn", "step"]]
-const sentences = ['just a phrase', 'also another phrase', 'arbitrary phrase', 'An interesting phrase'];
-const numberList = [1,2,3,4,1,2] //output = [[1,2],[2,2],[3,1],[4,1]]
+const danceClassSteps = [["step", "tap"], ["turn", "step"]];
+const sentences = [
+  "just a phrase",
+  "also another phrase",
+  "arbitrary phrase",
+  "An interesting phrase",
+];
+const numberList = [1, 2, 3, 4, 1, 2]; //output = [[1,2],[2,2],[3,1],[4,1]]
+const gardenWatering = [[1, 2, 1], [3], [2]];
 
-const uniqueNumbers = (acc, val) => {
-  if (!acc.includes(val)) {acc.push(val)}
-  return acc
-}
-const countNumbers = (list, number) => 
-  list.reduce((acc, val) => val === number ? acc + 1 : acc, 0)
-
-const countFrequencyOfNumbers = numbers => {
-  const numberList = numbers.reduce(uniqueNumbers, [])
-  const getFrequency = numberList.map(number => [number, countNumbers(numbers, number)])
-  return getFrequency
-}
-
-// const countFrequency = numbers => {
-//    return numbers.reduce((result, number, index, array) => {
-//     if (!result.includes(number)) {
-//       result.push([number, countElements(array, number)])
-//     }
-//     return result
-//   },[])
+// const gardenWateringAmount = list => {
+//   return list.
 // }
 
-const getAwords = phrases => 
-  phrases
-    .flatMap(sentence => sentence.split(" "))
-    .filter(word => word.toLowerCase()[0] === "a")
+const uniqueNumbers = (acc, val) => {
+  if (!acc.some((x) => x === val)) {
+    acc.push(val);
+  }
+  return acc;
+};
 
+const countNumbers = (list, number) =>
+  list.reduce((acc, val) => val === number ? acc + 1 : acc, 0);
+
+const countFrequencyOfNumbers = (numbers) => {
+  const numberList = numbers.reduce(uniqueNumbers, []);
+  const getFrequency = numberList.map(
+    (number) => [number, countNumbers(numbers, number)]
+  );
+  return getFrequency;
+};
+
+const getAwords = (phrases) =>
+  phrases
+    .flatMap((sentence) => sentence.split(" "))
+    .filter((word) => word.toLowerCase()[0] === "a");
 
 const checkDanceStep = function (array) {
-  return array.some((steps => steps.some(element => element === "step")))
-}
+  return array.some((steps) => steps.some((element) => element === "step"));
+};
 
 const countElements = (array, element) => {
-  return array.flatMap(x => x).reduce((result, value) => {
+  return array.flatMap((x) => x).reduce((result, value) => {
     return value === element ? result + 1 : result;
-  }, 0)
-}
+  }, 0);
+};
 
 const getUniqueElementsList = (array) => {
-  return array.flatMap(x => x).reduce((result, element) => { 
+  return array.flatMap((x) => x).reduce((result, element) => {
     if (!result.includes(element)) {
-      result.push(element)
-    } 
-    return result
-  },
-    [])
-}
+      result.push(element);
+    }
+    return result;
+  }, []);
+};
 
 const addElementValues = (array) => {
-  return array.flatMap(x => x).reduce((result, element) => result + element)
-}
+  return array.flatMap((x) => x).reduce((result, element) => result + element);
+};
 
 const isElementPresent = (array, element) => {
- return array.flat().some((value) => value === element);
-}
+  return array.flat().some((value) => value === element);
+};
 
 const isAllBelowThreshold = (array, threshold) => {
   const flatArray = array.flat();
   const result = flatArray.every((value) => value < threshold);
   return result;
-}
-
+};
 
 function composeResult(description, result, parameters) {
   const resultSymbol = result ? "✅" : "❌";
@@ -104,6 +112,7 @@ function composeResult(description, result, parameters) {
   }
   return resultString;
 }
+
 function underline(message) {
   return console.log(`${message}\n${("-").repeat(message.length)}`);
 }
@@ -140,64 +149,140 @@ function test(testType, description, input, expected, condition) {
   console.log(resultString);
 }
 
-
 function testCountElement() {
-  const testType = countElements;           // example of reduce
+  const testType = countElements; // example of reduce
   underline("Testing questions which needs count of elements");
   test(testType, "count blue ribbons cut", festive_ribbon, 2, "blue");
-  test(testType, "How many time Dune was returned", libraryReturnCount, 3, "Dune");
+  test(
+    testType,
+    "How many time Dune was returned",
+    libraryReturnCount,
+    3,
+    "Dune",
+  );
   test(testType, "How many time deer was spotted", wildLifeSighting, 3, "deer");
 
   underline("");
 }
 
-function testGetUniqueElementList() {       // example for reduce
+function testGetUniqueElementList() { // example for reduce
   const testType = getUniqueElementsList;
   underline("Testing questions which needs list of unique elements");
-  test(testType, "stargazingLog", stargazingLog, ["Orion", "Leo", "Taurus", "Gemini"]);
+  test(testType, "stargazingLog", stargazingLog, [
+    "Orion",
+    "Leo",
+    "Taurus",
+    "Gemini",
+  ]);
   test(testType, "Bird watch", birdWatch, ["sparrow", "crow", "eagle"]);
-  test(testType, "Classroom attendence check", classRoomAttendence, ["Asha", "Ravi", "Neel", "Meera"]);
-  test(testType, "Get unique colours", artWorkshop, ["blue", "yellow", "green"]);
-  test(testType, "Get unique lunch box Ingredients", lunchBoxIngredients, ["rice", "lentils", "curd"]);
-  test(testType, "Get unique parcel size", parcelSize, ["small", "large", "medium"]);
+  test(testType, "Classroom attendence check", classRoomAttendence, [
+    "Asha",
+    "Ravi",
+    "Neel",
+    "Meera",
+  ]);
+  test(testType, "Get unique colours", artWorkshop, [
+    "blue",
+    "yellow",
+    "green",
+  ]);
+  test(testType, "Get unique lunch box Ingredients", lunchBoxIngredients, [
+    "rice",
+    "lentils",
+    "curd",
+  ]);
+  test(testType, "Get unique parcel size", parcelSize, [
+    "small",
+    "large",
+    "medium",
+  ]);
 
   underline("");
 }
 
-function testAddElementValues() {           // example for reduce
+function testAddElementValues() { // example for reduce
   const testType = addElementValues;
   underline("Testing questions which needs the total values of all elements");
   test(testType, "count number of refills for candy jar", candyJar, 15);
   test(testType, "Fitness tracker total distance covered", fitnessTracker, 13);
   test(testType, "Total weight of vegetable crate", vegetableCrate, 21);
-  test(testType, "Total chapters completed by the students", chaptersCompleted, 13);
+  test(
+    testType,
+    "Total chapters completed by the students",
+    chaptersCompleted,
+    13,
+  );
 
   underline("");
 }
 
-function testIsElementPresent() {           // example for some
+function testIsElementPresent() { // example for some
   const testType = isElementPresent;
   underline("Testing questions which checks if a element is present");
-  test(testType, "Musical notes is \"do\" present", musicRehersalNotes, true, "do");
-  test(testType, "Any group said \"so\"", choirHarmony, true, "so");
+  test(
+    testType,
+    'Musical notes is "do" present',
+    musicRehersalNotes,
+    true,
+    "do",
+  );
+  test(testType, 'Any group said "so"', choirHarmony, true, "so");
 
-  underline("");  
+  underline("");
 }
 
-function testIsAllValueBelowThreshold() {   // example for every
+function testIsAllValueBelowThreshold() { // example for every
   const testType = isAllBelowThreshold;
-  underline("Testing questions which checks all elements are below a certian threshold");
-  test(testType, "check if all temperature are below 32", weatherSensor, true, 32);
+  underline(
+    "Testing questions which checks all elements are below a certian threshold",
+  );
+  test(
+    testType,
+    "check if all temperature are below 32",
+    weatherSensor,
+    true,
+    32,
+  );
 
-  underline("");  
+  underline("");
 }
 
-function testCustomPerdicates () {
-  underline("Custom perdicate test experiments")
-  console.log("Check if dance steps contain \'step\'", checkDanceStep(danceClassSteps))
-  console.log("Get elements with words starting with \"A\" or \"a\"", getAwords(sentences))
-  console.log("count the frequency of numbers",countFrequencyOfNumbers(numberList))
-  underline("")
+function testCustomPerdicates() {
+  underline("Custom perdicate test experiments");
+  console.log(
+    "Check if dance steps contain 'step'",
+    checkDanceStep(danceClassSteps),
+  );
+  console.log(
+    'Get elements with words starting with "A" or "a"',
+    getAwords(sentences),
+  );
+  console.log(
+    "count the frequency of numbers",
+    countFrequencyOfNumbers(numberList),
+  );
+  underline("");
+}
+
+const QUESTIONS = [
+  // testType, description, questionInput, expected, condition
+  [ isAllBelowThreshold, "check if all temperature are below 32", weatherSensor, true, 32],
+  [ isAllBelowThreshold, "check if all temperature are below 32", weatherSensor, true, 32],
+];
+
+const performTest = (question) => {
+  const testType = question[0];
+  const description = question[1];
+  const input = question[2];
+  const expected = question[3];
+  const condition = question[4];
+  underline("Test Array format");
+  test(testType, description, input, expected, condition);
+  underline("");
+};
+
+function testInArrayFormat() {
+  QUESTIONS.forEach(performTest);
 }
 
 const main = function () {
@@ -207,6 +292,7 @@ const main = function () {
   testIsElementPresent();
   testIsAllValueBelowThreshold();
   testCustomPerdicates();
-}
+  testInArrayFormat();
+};
 
 main();
